@@ -11,32 +11,37 @@ sudo apt-get install --no-install-recommends xorg lightdm dwm dmenu make gcc
 # dwm is very fast, secure, effecient, and clean keyboard driven window manager
 # dmenu is a searchable menu system that works with dwm
 # make and gcc is needed for vbox guest additions
-sudo apt-get install lightdm-gtk-greeter git curl nodejs 
+sudo apt-get install lightdm-gtk-greeter git curl 
 
 sudo mkdir /media/cdrom
 sudo mount /dev/cdrom /media/cdrom
 sudo /media/cdrom/VBoxLinuxAdditions.run
 mkdir share
 #nano .bashrc
-  #source ~/.rvm/scripts/rvm
-  #sudo mount -t vboxsf share ~/share
-
-\curl -sSL https://get.rvm.io | bash
-rvm install 2.0.0-p195
-rvm install 2.1.1
-rvm --default use 2.0.0-p195
+echo 'sudo mount -t vboxsf share ~/share' >> .bashrc
 
 sudo apt-get install python-software-properties software-properties-common
 sudo add-apt-repository ppa:webupd8team/sublime-text-3
 sudo apt-get update
 sudo apt-get install sublime-text-installer
 
+# Get the latest R version
+sudo apt-key adv –keyserver keyserver.ubuntu.com –recv-keys E084DAB9
+sudo add-apt-repository ‘deb http://star-www.st-andrews.ac.uk/cran/bin/linux/ubuntu trusty/’
+sudo apt-get update
+sudo apt-get install r-base
+
+# Download and install RStudio
+wget http://download1.rstudio.org/rstudio-0.98.1091-amd64.deb
+sudo dpkg -i *.deb
+rm *.deb
+
 git config --global user.name ""
 git config --global user.email ""
 ssh-keygen -t rsa -C ""
 ssh-add ~/.ssh/id_rsa
 
-sudo apt-get install libpq-dev bundler firefox 
+sudo apt-get install libpq-dev bundler firefox libxml2-dev openjdk-7-jdk
 bundle install
 bundle update
 
@@ -45,3 +50,7 @@ bundle update
   #[SeatDefaults]
   #autologin-user=<YOUR USER>
   #autologin-user-timeout=0
+sudo sed -i '$ a\ [SeatDefaults] 
+  utologin-user=<YOUR USER> 
+  autologin-user-timeout=0' /etc/lightdm/lightdm.conf
+
