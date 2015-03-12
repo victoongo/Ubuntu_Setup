@@ -2,7 +2,7 @@
 
 # A shell script to set up a minimalist Ubuntu VM based on 14.04 LTS Trusty Tahr mini.iso
 # for data science using R, python (Annaconda), PostgreSQL. 
-# I chose LightDM (with GTK+ Greeter), DWM, dmenu as my desktop environment. 
+# I chose LightDM (with GTK+ Greeter), dwm, dmenu as my desktop environment. 
 
 *** lightdm with gtk greeter
 sudo apt-get install --no-install-recommends xorg lightdm dwm dmenu make gcc 
