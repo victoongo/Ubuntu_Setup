@@ -76,11 +76,14 @@ update.packages(checkBuilt=TRUE, ask=FALSE)
 # then remove old R library folder
 rm -rf ~/R/x86_64-pc-linux-gnu-library/3.1
 
+# 
+mkdir ~/Applications
+
 # install miniconda for scientific python2.79
-wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O ~/miniconda.sh
-bash ~/miniconda.sh -b -p $HOME/miniconda
+wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O ~/Applications/miniconda.sh
+bash ~/Applications/miniconda.sh -b -p $HOME/Applications/miniconda
 # put this in ~/.profile
-export PATH="$HOME/miniconda/bin:$PATH"
+export PATH="$HOME/Applications/miniconda/bin:$PATH"
 
 # wget http://repo.continuum.io/miniconda/Miniconda-3.8.3-Linux-x86_64.sh
 # bash Miniconda-3.8.3-Linux-x86_64.sh
@@ -88,17 +91,35 @@ conda update conda
 
 conda create -n boa python=2
 source activate boa
-conda install numpy pandas spyder scikit-learn matplotlib statsmodels 
-conda install pip num2words
+conda install numpy pandas spyder scikit-learn matplotlib statsmodels ipython-notebook
+conda install pip num2words sas7bdat 
+pip install rpy2
 source deactivate
+# Spyder config needed for DWM to display graph:
+# Tools:Preferences:IPython Console:Graphics:
 
-# install bluej via deb/dpkg
-# drjava only need to be unpacked to run
+# install bluej via deb/dpkg: bluej/bluej
+# drjava only need to be unpacked to run: dr
+# intellij idea only need to be unpacked to run: bash idea.sh
+
+# Java IDE display issue with dwm
+# Use OpenJDK With Vendor Fix[edit]
+_JAVA_AWT_WM_NONREPARENTING=1; export _JAVA_AWT_WM_NONREPARENTING
+# Impersonate Another Window Manager[edit]
+# You may use the wmname utility to make the JVM believe you are running a different window manager. 
+# This utility is available in the suckless-tools package in Debian (and Ubuntu)
+wmname LG3D
+# (You must restart the application in question after issuing the wmname command.)
+
 
 # install sbt
 echo "deb http://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
 sudo apt-get update
 sudo apt-get install sbt
+
+# spark
+# spark with hadoop binary comes with scala and sbt
+# only needs extraction to run
 
 # sublime text 3
 sudo add-apt-repository ppa:webupd8team/sublime-text-3
@@ -115,3 +136,10 @@ sudo ln -s /opt/sublime_text_3/sublime_text /usr/bin/sublime
 # rvm install 2.0.0-p195
 # rvm --default use 2.0.0-p195
 # echo 'source ~/.rvm/scripts/rvm' >> .bashrc
+
+# Clean up and monitoring
+sudo apt-get clean
+sudo apt-get autoclean # remove all but the latest version
+sudo apt-cache ubuntu-desktop
+df -h | grep '[0-9\.]\+G' # overall 
+du -h | grep '[0-9\.]\+G' # each folder
