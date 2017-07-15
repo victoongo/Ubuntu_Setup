@@ -40,7 +40,9 @@ echo 'sudo mount -t vboxsf share ~/share' >> .bashrc
 # other stuff
 sudo apt-get install python-software-properties software-properties-common
 sudo apt-get install libcurl4-gnutls-dev htop gnome-system-monitor
-sudo apt-get install libpq-dev bundler firefox libxml2-dev openjdk-7-jdk libgtk-3-dev libgtk2.0-dev
+sudo apt-get install libpq-dev bundler firefox libxml2-dev openjdk-7-jdk libgtk-3-dev libgtk2.0-dev ttf-mscorefonts-installer
+sudo apt-get install libiodbc2-dev 
+sudo apt-get install pdftk
 bundle install
 bundle update
 
@@ -67,6 +69,7 @@ sudo R CMD javareconf
 # install.packages('rJava')
 
 # update R and mv libraries
+# After using this solution, I prefer just get the names with installed.packages() and reinstall everything. 
 mv ~/R/x86_64-pc-linux-gnu-library/3.1/* ~/R/x86_64-pc-linux-gnu-library/3.2
 # in R run 
 update.packages(checkBuilt=TRUE, ask=FALSE)
@@ -88,12 +91,16 @@ export PATH="$HOME/Applications/miniconda/bin:$PATH"
 # wget http://repo.continuum.io/miniconda/Miniconda-3.8.3-Linux-x86_64.sh
 # bash Miniconda-3.8.3-Linux-x86_64.sh
 conda update conda
+conda install numpy pandas scikit-learn matplotlib statsmodels ipython-notebook
+conda install csvkit
 
 conda create -n boa python=2
 source activate boa
 conda install numpy pandas spyder scikit-learn matplotlib statsmodels ipython-notebook
-conda install pip num2words sas7bdat 
-pip install rpy2
+conda install pip scrapy # sas7bdat
+conda install rope jedi pep8 psutil pyflakes # for autocompletions and doc pop up in spyder and other dependencies. 
+pip install rpy2 num2words
+spyder
 source deactivate
 # Spyder config needed for DWM to display graph:
 # Tools:Preferences:IPython Console:Graphics:
@@ -101,6 +108,11 @@ source deactivate
 # install bluej via deb/dpkg: bluej/bluej
 # drjava only need to be unpacked to run: dr
 # intellij idea only need to be unpacked to run: bash idea.sh
+
+# add the follow to .profile to create shortcuts
+alias idea='bash /home/victor/Applications/idea-IC-141.1010.3/bin/idea.sh'
+alias drjava='java -jar /home/victor/Dropbox/Projects/JWalk/Algorithms_part_I/drjava-stable-20140826-r5761.jar'
+
 
 # Java IDE display issue with dwm
 # Use OpenJDK With Vendor Fix[edit]
@@ -121,6 +133,11 @@ sudo apt-get install sbt
 # spark with hadoop binary comes with scala and sbt
 # only needs extraction to run
 
+# skype
+sudo dpkg --add-architecture i386
+sudo add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
+sudo apt-get update && sudo apt-get install skype pulseaudio:i386
+
 # sublime text 3
 sudo add-apt-repository ppa:webupd8team/sublime-text-3
 sudo apt-get update
@@ -137,7 +154,21 @@ sudo ln -s /opt/sublime_text_3/sublime_text /usr/bin/sublime
 # rvm --default use 2.0.0-p195
 # echo 'source ~/.rvm/scripts/rvm' >> .bashrc
 
-# Clean up and monitoring
+
+## Linux Admin: upgrade, clean up, and monitoring
+sudo apt-get update
+sudo apt-get dist-upgrade
+sudo apt-get autoremove
+
+# upgrade to the hardware enablement stack for Trusty may do so by running following command which will install the linux-generic-lts-utopic and xserver-xorg-lts-utopic packages:
+sudo apt-get install linux-generic-lts-utopic xserver-xorg-lts-utopic libegl1-mesa-drivers-lts-utopic xserver-xorg-video-all-lts-utopic xserver-xorg-input-all-lts-utopic 
+
+# If on an amd64 system that boots with UEFI, need the matching signed kernel:
+sudo apt-get install linux-signed-generic-lts-utopic 
+
+# remove old kernels after kernel upgrade
+dpkg -l 'linux-*' | sed  '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]*  [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | xargs sudo apt-get -y purge
+
 sudo apt-get clean
 sudo apt-get autoclean # remove all but the latest version
 sudo apt-cache ubuntu-desktop
