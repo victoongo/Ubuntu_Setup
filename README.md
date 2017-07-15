@@ -1,4 +1,15 @@
-Ubuntu_Tiny_Dev
+Setup Ubuntu for data science
 ===============
 
-A shell script to set up a minimalist Ubuntu VM based on 14.04 LTS Trusty Tahr for Rails development using LightDM (with GTK+ Greeter), DWM, Sublime Text 3, Firefox, RVM...
+- git openjdk chrome sublime htop 
+- miniconda
+	1. Create env
+	2. install scikit-learn pandas jupyter matplotlib 
+	3. tensorflow keras theano
+- XGBoost
+- CUDA, cuDNN
+- H2O
+- pycharm
+	1. Create desktop icon
+- Spark
+- Dropbox
