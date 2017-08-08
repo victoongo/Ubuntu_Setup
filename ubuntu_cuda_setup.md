@@ -22,5 +22,18 @@ export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 export LD_LIBRARY_PATH=/home/victor/Applications/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 ```
-5. Additional Notes:
+5. run nvidia-smi to verify the driver installed correctly. 
+6, After installing TF, run the following script to verfity TF can use the GPU. 
+```
+import tensorflow as tf
+with tf.device('/gpu:0'):
+    a = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[2, 3], name='a')
+    b = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[3, 2], name='b')
+    c = tf.matmul(a, b)
+
+with tf.Session() as sess:
+    print (sess.run(c))
+```
+7, Additional Notes:
     - TF does NOT work with the latest python 3.6. so create a conda env with Python 3.5 for it. 
+8, After a while nvidia-smi stopped being able to communicate with the GPU. Had to reinstall CUDA8 twice for the GPU to work properly again. 
