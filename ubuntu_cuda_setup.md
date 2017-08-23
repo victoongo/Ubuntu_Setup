@@ -36,4 +36,4 @@ with tf.Session() as sess:
 ```
 7, Additional Notes:
     - TF does NOT work with the latest python 3.6. so create a conda env with Python 3.5 for it. 
-8, After a while nvidia-smi stopped being able to communicate with the GPU. Had to reinstall CUDA8 twice for the GPU to work properly again. 
+8, After a while nvidia-smi stopped being able to communicate with the GPU. Had to reinstall CUDA8 twice for the GPU to work properly again. Does this happen only after a dist-upgrade?
