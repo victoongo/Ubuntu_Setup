@@ -2,7 +2,7 @@
 
 ### Instruction as of 7/14/2017
 
-### Main CUDA installation guild: http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html
+### Main CUDA installation guide: http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html
 
 1. Perform Pre-installation Actions for CUDA 8.0
     - Roll back kernel version to original LTS if needed. Cuda may not play nice with the newer HWE stack. 

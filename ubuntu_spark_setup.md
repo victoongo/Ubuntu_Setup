@@ -12,9 +12,9 @@ tar zxf spark-2.0.0-bin-hadoop2.7.tgz
 
 ### on Ubuntu, add to .bashrc (or .profile). on Mac, add to .bash_profile
 ```
-export PATH="/Users/l323423/Applications/spark-2.0.0-bin-hadoop2.7/bin:$PATH"
+export PATH="/home/user/Applications/spark-2.0.0-bin-hadoop2.7/bin:$PATH"
 
-export SPARK_HOME=/Users/l323423/Applications/spark-2.0.0-bin-hadoop2.7
+export SPARK_HOME=/home/user/Applications/spark-2.0.0-bin-hadoop2.7
 
 export PYSPARK_DRIVER_PYTHON=jupyter
 export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
@@ -22,18 +22,46 @@ export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
 export PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/build:$PYTHONPATH
 ```
 
-### Run .bash_profile like this to have the env variables above available:
-#### note: .bash_profile autoruns upon restart. so you don't need to run this again
+### Run .bashrc to have the env variables above available:
+#### note: .bashrc autoruns upon restart. so you don't need to run this again
 ```
-. ~/.bash_profile
+. ~/.bashrc
 ```
 
-### start pyspark (with jupyter notebook as default) like this:
+### activate the conda env as needed
+```
+source activate myenv
+```
+
+### start pyspark (with jupyter notebook as default):
 ```
 pyspark
 ```
 
-### remote Ubuntu, like this
+### remote Ubuntu
 ```
 --pylab inline --no-browser --port=7778" pyspark
+```
+
+### spark config
+#### As SparkContext is already available in your Notebook:
+```
+sc._conf.get('spark.driver.memory')
+```
+
+#### You can set as well, but you have to shutdown the existing SparkContext first:
+```
+conf = SparkConf().setAppName("App")
+conf = (conf.setMaster('local[*]')
+        .set('spark.executor.memory', '4G')
+        .set('spark.driver.memory', '6G')
+        .set('spark.driver.maxResultSize', '6G'))
+sc = SparkContext(conf=conf)
+```
+
+#### for all analysis, edit spark-defaults.conf 
+```
+spark.executor.memory		4G
+spark.driver.memory			6G
+spark.driver.maxResultSize	6G
 ```
