@@ -10,11 +10,11 @@ wget http://d3kbcqa49mib13.cloudfront.net/spark-2.0.0-bin-hadoop2.7.tgz
 tar zxf spark-2.0.0-bin-hadoop2.7.tgz
 ```
 
-### on Ubuntu, add to .bashrc (or .profile). on Mac, add to .bash_profile
+### add to .bashrc (or .profile). on Mac, add to .bash_profile
 ```
-export PATH="/home/user/Applications/spark-2.0.0-bin-hadoop2.7/bin:$PATH"
+export PATH="/home/user/Applications/spark-2.2.0-bin-hadoop2.7/bin:$PATH"
 
-export SPARK_HOME=/home/user/Applications/spark-2.0.0-bin-hadoop2.7
+export SPARK_HOME=/home/user/Applications/spark-2.2.0-bin-hadoop2.7
 
 export PYSPARK_DRIVER_PYTHON=jupyter
 export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
@@ -38,7 +38,7 @@ source activate myenv
 pyspark
 ```
 
-### remote Ubuntu
+#### remote Ubuntu
 ```
 --pylab inline --no-browser --port=7778" pyspark
 ```
@@ -62,6 +62,11 @@ sc = SparkContext(conf=conf)
 #### for all analysis, edit spark-defaults.conf 
 ```
 spark.executor.memory		4G
-spark.driver.memory			6G
+spark.driver.memory		6G
 spark.driver.maxResultSize	6G
+```
+
+### check spark cluster status (when there is a spark kernel running)
+```
+http://localhost:4040
 ```

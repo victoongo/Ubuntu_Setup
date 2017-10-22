@@ -23,7 +23,7 @@ export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY
 export LD_LIBRARY_PATH=/home/victor/Applications/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 ```
 5. run nvidia-smi to verify the driver installed correctly. 
-6, After installing TF, run the following script to verfity TF can use the GPU. 
+6. After installing TF, run the following script to verfity TF can use the GPU. 
 ```
 import tensorflow as tf
 with tf.device('/gpu:0'):
@@ -34,6 +34,9 @@ with tf.device('/gpu:0'):
 with tf.Session() as sess:
     print (sess.run(c))
 ```
-7, Additional Notes:
+7. Additional Notes:
     - TF does NOT work with the latest python 3.6. so create a conda env with Python 3.5 for it. 
-8, After a while nvidia-smi stopped being able to communicate with the GPU. Had to reinstall CUDA8 twice for the GPU to work properly again. Does this happen only after a dist-upgrade?
+8. After a while nvidia-smi stopped being able to communicate with the GPU. Had to reinstall CUDA8 twice for the GPU to work properly again. Does this happen only after a dist-upgrade?
+9. select nvidia driver from the 'additional drivers' app to make sure using the right openGL driver. 
+10. Nvidia driver setup may be causing the login loop after the P710 wake up from s3. Try newer driver installed through apt-get. check which version of the driver for which card. 
+11. the 375.25 driver from cuda 8 are too old to support 1080 ti. need to install the 381 with apt-get first (installing 384 run file led to login loop) and then install cuda 8 without the driver and openGL. This lead to modification of xorg so the previous setup of using GPU for compute only no longer works. right now about 400MB memory is used for display even though iGPU is used for display. Changing config to use iGPU as primary also led to login loop. 
