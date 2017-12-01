@@ -1,13 +1,13 @@
 
 ### install Java and anaconda
 ```
-sudo apt-get install openjdk-7-jdk
+sudo apt-get install openjdk-8-jdk
 ```
 
 ### get Spark binary and UNPACK at the location you want such as '~/Applications/''
 ```
-wget http://d3kbcqa49mib13.cloudfront.net/spark-2.0.0-bin-hadoop2.7.tgz
-tar zxf spark-2.0.0-bin-hadoop2.7.tgz
+wget wget http://mirror.jax.hugeserver.com/apache/spark/spark-2.2.0/spark-2.2.0-bin-hadoop2.7.tgz
+tar zxf spark-2.2.0-bin-hadoop2.7.tgz
 ```
 
 ### add to .bashrc (or .profile). on Mac, add to .bash_profile
@@ -43,7 +43,7 @@ pyspark
 --pylab inline --no-browser --port=7778" pyspark
 ```
 
-### spark config
+### get spark config
 #### As SparkContext is already available in your Notebook:
 ```
 sc._conf.get('spark.driver.memory')
@@ -59,7 +59,7 @@ conf = (conf.setMaster('local[*]')
 sc = SparkContext(conf=conf)
 ```
 
-#### for all analysis, edit spark-defaults.conf 
+#### change defaults for all analysis, edit spark-defaults.conf 
 ```
 spark.executor.memory		4G
 spark.driver.memory		6G

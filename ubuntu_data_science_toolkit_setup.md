@@ -1,5 +1,8 @@
+# 
+mkdir ~/Applications
 
 # miniconda 3.6
+wget https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh
 - create env 3.5
 conda create -n py35 python=3.5
@@ -10,13 +13,14 @@ pip install ipython-autotime
 # h2o
 1. Install Java 8 jdk: sudo apt-get install openjdk-8-jdk
 2. Download and unzip h2o to use with flow independently
-3. conda install -c h2oai h2o=3.14.0.2
-    - List of versions: https://anaconda.org/h2oai/h2o/files
+wget http://h2o-release.s3.amazonaws.com/h2o/rel-wheeler/2/h2o-3.16.0.2.zip
+3. pip install http://h2o-release.s3.amazonaws.com/h2o/rel-wheeler/2/Python/h2o-3.16.0.2-py2.py3-none-any.whl
 4. java -Xmx24g -jar h2o.jar -name V8 (without a unique name, h2o will attempt to join anohter cloud on the LAN.)
 
 # Sparklingwater
-export PATH="/home/victor/Applications/sparkling-water-2.2.0/bin:$PATH"
-export PYTHONPATH=/home/victor/Applications/sparkling-water-2.2.0/py:/home/victor/Applications/sparkling-water-2.2.0/py/build:$PYTHONPATH
+wget http://h2o-release.s3.amazonaws.com/sparkling-water/rel-2.2/3/sparkling-water-2.2.3.zip
+export PATH="/home/user/Applications/sparkling-water-2.2.3/bin:$PATH"
+export PYTHONPATH=/home/user/Applications/sparkling-water-2.2.3/py:/home/user/Applications/sparkling-water-2.2.3/py/build:$PYTHONPATH
 
 # Deepwater
 
@@ -46,3 +50,4 @@ jupyter notebook password
 
 # sublime
 
+# pycharm
