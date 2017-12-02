@@ -67,6 +67,4 @@ spark.driver.maxResultSize	6G
 ```
 
 ### check spark cluster status (when there is a spark kernel running)
-```
 http://localhost:4040
-```
