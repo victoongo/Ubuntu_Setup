@@ -8,29 +8,61 @@ mkdir ~/Applications
 wget https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh
 # create env 3.5
-conda create -n py35 python=3.5
-source activate py35
-conda install pandas scikit-learn statsmodels jupyter seaborn plotly 
-pip install ipython-autotime keras catboost lightgbm
+conda create -n py36 python=3.6
+source activate py36
+conda install pandas scikit-learn statsmodels scipy jupyter matplotlib seaborn plotly 
+pip install keras catboost lightgbm opencv-python
+
+jupyter notebook --generate-config
+jupyter notebook password
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout mykey.key -out mycert.pem
+
+conda install -c conda-forge jupyter_contrib_nbextensions
+jupyter nbextensions_configurator enable --user
+```
+
+## add to .jupyter/jupyter_notebook_config.py
+```
+c.NotebookApp.certfile = u'/home/user/certificate/mycert.pem'
+c.NotebookApp.keyfile = u'/home/user/certificate/mykey.key'
+c.NotebookApp.ip = '0.0.0.0'
+c.NotebookApp.notebook_dir = u'/home/user/notebooks'
+c.NotebookApp.open_browser = False
+c.NotebookApp.port = 8888
+c.NotebookApp.password_required = False
+```
+
+
+# connect to odbc
+```
 ```
 
 # h2o
 ```
 sudo apt-get install openjdk-8-jdk
+
 # Download and unzip h2o to use with flow independently
 wget http://h2o-release.s3.amazonaws.com/h2o/rel-wheeler/2/h2o-3.16.0.2.zip
-pip install http://h2o-release.s3.amazonaws.com/h2o/rel-wheeler/2/Python/h2o-3.16.0.2-py2.py3-none-any.whl
+unzip h2o-3.16.0.2.zip
 java -Xmx24g -jar h2o.jar -name V8 # without a unique name, h2o will attempt to join anohter cloud on the LAN.
+
+# install h2o for python
+pip install http://h2o-release.s3.amazonaws.com/h2o/rel-wheeler/2/Python/h2o-3.16.0.2-py2.py3-none-any.whl
 ```
 
 # Sparklingwater
 ```
 wget http://h2o-release.s3.amazonaws.com/sparkling-water/rel-2.2/3/sparkling-water-2.2.3.zip
+unzip sparkling-water-2.2.3.zip
+pysparkling
 ```
+
+## add to .bashrc
 ```
 export PATH="/home/user/Applications/sparkling-water-2.2.3/bin:$PATH"
 export PYTHONPATH=/home/user/Applications/sparkling-water-2.2.3/py:/home/user/Applications/sparkling-water-2.2.3/py/build:$PYTHONPATH
 ```
+
 # Deepwater
 
 # XGBoost
