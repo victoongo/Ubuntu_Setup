@@ -100,6 +100,13 @@ make -j4
 ```
 
 # tensorflow
+pip install tensorflow-cpu
+pip install tensorflow[and-cuda]
+
+# pytorch
+# GPU
+# CPU
+
 
 # Spark
 
